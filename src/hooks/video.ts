@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { videoServices } from "../services";
 import { IPagination, IVideoFilter, IVideoResponse } from "../interface";
+import { notification } from "antd";
 const useVideoHook = (defaultFilters: IVideoFilter) => {
   const [loading, setLoading] = useState(false);
   const [videos, setVideos] = useState<IVideoResponse[]>([]);
@@ -33,6 +34,9 @@ const useVideoHook = (defaultFilters: IVideoFilter) => {
       const res = await videoServices.share(url);
       if (res) {
         console.log(res);
+        notification.success({
+          message: "Create video successfully",
+        });
       }
     } catch (e) {
     } finally {

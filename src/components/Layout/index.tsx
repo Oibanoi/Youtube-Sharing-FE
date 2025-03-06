@@ -13,9 +13,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const { login, loading } = userHooks.useUserHook();
   const onLogout = () => {
+    setUser(null);
     userServices.logout();
     navigate("/");
   };
@@ -26,6 +27,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
   const shareMovie = () => {
     navigate("/share");
+  };
+  const onRegister = () => {
+    navigate("/register");
   };
   return (
     <div
@@ -90,7 +94,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <Button type="primary" onClick={onLogin} loading={loading}>
-                  Login / Register
+                  Login
+                </Button>
+                <Button type="primary" onClick={onRegister} loading={loading}>
+                  Register
                 </Button>
               </>
             )}
