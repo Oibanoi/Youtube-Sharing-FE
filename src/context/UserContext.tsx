@@ -1,38 +1,65 @@
-// src/context/UserContext.tsx
-import React, { createContext, useState, ReactNode } from "react";
+import React, { createContext, useState, ReactNode, useEffect } from "react";
 
-// Define the type for the user data
 interface User {
   id?: string;
   email: string;
   name?: string;
 }
 
-// Define the context's type
 interface UserContextType {
   user: User | null;
   setUser: (user: User | null) => void;
+  socket: WebSocket | null;
+  setSocket: (socket: WebSocket | null) => void;
 }
 
-// Create the context with a default value
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-// Create a provider component
 interface UserProviderProps {
   children: ReactNode;
 }
 
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null); // Initial state is null (no user logged in)
+  const [user, setUser] = useState<User | null>(null);
+  const [socket, setSocket] = useState<WebSocket | null>(null);
+  useEffect(() => {
+    if (user) {
+      const ws = new WebSocket("ws://localhost:8000/ws");
 
+      ws.onopen = () => {
+        console.log("WebSocket connection established");
+        ws.send(JSON.stringify({ type: "USER_CONNECTED", userId: user.id }));
+      };
+
+      ws.onmessage = (event) => {
+        console.log("Received message:", event.data);
+      };
+
+      ws.onclose = () => {
+        console.log("WebSocket connection closed");
+      };
+
+      setSocket(ws);
+
+      return () => {
+        if (ws.readyState === WebSocket.OPEN) {
+          ws.close();
+        }
+      };
+    } else {
+      if (socket) {
+        socket.close();
+        setSocket(null);
+      }
+    }
+  }, [user]);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, socket, setSocket }}>
       {children}
     </UserContext.Provider>
   );
 };
 
-// Custom hook to use the user context
 const useUser = (): UserContextType => {
   const context = React.useContext(UserContext);
   if (!context) {

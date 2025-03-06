@@ -1,18 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { videoServices } from "../services";
-import { IVideoResponse } from "../interface";
-const useVideoHook = () => {
+import { IPagination, IVideoFilter, IVideoResponse } from "../interface";
+const useVideoHook = (defaultFilters: IVideoFilter) => {
   const [loading, setLoading] = useState(false);
   const [videos, setVideos] = useState<IVideoResponse[]>([]);
-  const [total, setTotal] = useState<number>(0);
-  const getVideos = async () => {
+  const [filters, setFilters] = useState(defaultFilters);
+  const [pagination, setPagination] = useState<IPagination>();
+  console.log("useVideoHook");
+  const getVideos = async (params: IVideoFilter) => {
     try {
       setLoading(true);
-      const res = await videoServices.get();
-      if (res) {
-        const { posts, total } = res;
-        setVideos(posts ?? []);
-        setTotal(total);
+      const res = await videoServices.get(params);
+      console.log(res);
+      if (res.data) {
+        const { currentPage, pageSize, totalItems } = res.metadata;
+        const videos = res.data;
+        setVideos(videos);
+        setPagination({
+          currentPage: currentPage,
+          pageSize,
+          totalItems: totalItems,
+        });
       }
     } catch (e) {
     } finally {
@@ -31,12 +39,17 @@ const useVideoHook = () => {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    console.log("useEffect");
+    getVideos(filters);
+  }, [filters]);
   return {
     loading,
     postVideo,
     getVideos,
     videos,
-    total,
+    pagination,
+    setFilters,
   };
 };
 export default {

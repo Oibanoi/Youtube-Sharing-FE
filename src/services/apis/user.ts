@@ -1,9 +1,9 @@
-import { redirect } from "react-router-dom";
 import { requestServices } from "../../services";
 import { getData } from "../../helpers/request";
 import { ILogin, ISignUpPayload, ISignUpResponse } from "../../interface/user";
 
 const { baseClient } = requestServices;
+
 const isLoggedIn = () => {
   const token = localStorage.getItem("token");
   // return true;
@@ -14,7 +14,6 @@ const getMe = () => {
 };
 const logout = async () => {
   localStorage.removeItem("token");
-  redirect("/");
 };
 const login = (username: string, password: string): Promise<ILogin> => {
   return baseClient

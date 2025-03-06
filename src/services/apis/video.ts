@@ -1,13 +1,17 @@
 import { requestServices } from "..";
-import { getData } from "../../helpers/request";
-import { IVideoResponse } from "../../interface";
+import { getData, getResult } from "../../helpers/request";
+import {
+  IGetVideoResponse,
+  IVideoFilter,
+  IVideoResponse,
+} from "../../interface";
 
 const { baseClient } = requestServices;
 const share = (url: string): Promise<IVideoResponse> => {
-  return baseClient.post("/share", { url: url }).then(getData);
+  return baseClient.post("/videos", { videoUrl: url }).then(getData);
 };
-const get = () => {
-  return baseClient.get("").then(getData);
+const get = (params: IVideoFilter): Promise<IGetVideoResponse> => {
+  return baseClient.get("/videos", { params }).then(getResult);
 };
 export default {
   share,
