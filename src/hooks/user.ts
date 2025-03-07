@@ -10,7 +10,6 @@ const useUserHook = () => {
     try {
       setLoading(true);
       const res = await userServices.login(username, password);
-      console.log(res.accessToken);
       if (res.accessToken) {
         const token = res.accessToken;
         const email = res.email;

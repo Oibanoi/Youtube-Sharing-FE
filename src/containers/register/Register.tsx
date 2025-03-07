@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import { Form, Input, Button, message } from "antd";
+import { Form, Input, Button, message, notification } from "antd";
 import { userHooks } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 
 const Register: React.FC = () => {
-  const [form] = Form.useForm(); // Ant Design form instance
+  const [form] = Form.useForm();
 
   const navigate = useNavigate();
   const { signUp } = userHooks.useUserHook();
-  // Handle form submission
   const handleSubmit = (values: any) => {
-    // You can replace this with your registration logic
-    console.log("Form Values: ", values);
     message.success("Registration successful!");
     signUp({ email: values.email, password: values.password }).then(() => {
       navigate("/");

@@ -1,3 +1,4 @@
+import { notification } from "antd";
 import React, { createContext, useState, ReactNode, useEffect } from "react";
 
 interface User {
@@ -33,6 +34,10 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
 
       ws.onmessage = (event) => {
         console.log("Received message:", event.data);
+        notification.open({
+          message: "New Notification",
+          description: event.data,
+        });
       };
 
       ws.onclose = () => {

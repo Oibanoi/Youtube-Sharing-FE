@@ -7,12 +7,10 @@ const useVideoHook = (defaultFilters: IVideoFilter) => {
   const [videos, setVideos] = useState<IVideoResponse[]>([]);
   const [filters, setFilters] = useState(defaultFilters);
   const [pagination, setPagination] = useState<IPagination>();
-  console.log("useVideoHook");
   const getVideos = async (params: IVideoFilter) => {
     try {
       setLoading(true);
       const res = await videoServices.get(params);
-      console.log(res);
       if (res.data) {
         const { currentPage, pageSize, totalItems } = res.metadata;
         const videos = res.data;
@@ -33,7 +31,6 @@ const useVideoHook = (defaultFilters: IVideoFilter) => {
       setLoading(true);
       const res = await videoServices.share(url);
       if (res) {
-        console.log(res);
         notification.success({
           message: "Create video successfully",
         });
@@ -44,7 +41,6 @@ const useVideoHook = (defaultFilters: IVideoFilter) => {
     }
   };
   useEffect(() => {
-    console.log("useEffect");
     getVideos(filters);
   }, [filters]);
   return {

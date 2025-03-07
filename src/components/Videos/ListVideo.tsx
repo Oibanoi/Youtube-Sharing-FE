@@ -5,11 +5,8 @@ import styled from "styled-components";
 
 const { Title, Text } = Typography;
 const ListVideo = () => {
-  console.log("ListVideo");
   const { videos } = videoHooks.useVideoHook({ page: 1, page_size: 10 });
-  console.log(videos);
   const getYoutubeId = (url: string): string | null => {
-    console.log("getYoutubeId", url);
     const regex =
       /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
     const match = url.match(regex);
@@ -21,7 +18,6 @@ const ListVideo = () => {
         <Card key={video.id} style={{ marginBottom: 20 }} bordered={false}>
           <Row gutter={16} align="middle">
             <Col span={12}>
-              {/* YouTube Video */}
               <iframe
                 width="100%"
                 height="315"
@@ -51,7 +47,6 @@ const ListVideo = () => {
                 </Col>
               </Row>
 
-              {/* Voting Buttons */}
               <Row style={{ marginTop: 10 }}>
                 <Col span={24}>
                   <Space>

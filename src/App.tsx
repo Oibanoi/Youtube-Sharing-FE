@@ -4,6 +4,7 @@ import routes from "./routes";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import React from "react";
+
 function App() {
   return (
     <Router>
