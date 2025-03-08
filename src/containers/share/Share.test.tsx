@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { vi } from "vitest";
+import { Mock, vi } from "vitest";
 import Share from "./Share";
 import { videoHooks } from "../../hooks";
 
@@ -41,7 +41,7 @@ describe("Share component", () => {
 
   test("calls postVideo function when form is submitted", async () => {
     const postVideoMock = vi.fn().mockResolvedValue({});
-    (videoHooks.useVideoHook as vi.Mock).mockReturnValue({
+    (videoHooks.useVideoHook as Mock).mockReturnValue({
       postVideo: postVideoMock,
     });
 

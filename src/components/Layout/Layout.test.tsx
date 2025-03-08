@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { vi } from "vitest";
+import { Mock, vi } from "vitest";
 import Layout from "./index";
 import { useUser } from "../../context/UserContext";
 import { userHooks } from "../../hooks";
@@ -24,7 +24,7 @@ describe("Layout component", () => {
   });
 
   test("renders login form when user is not logged in", () => {
-    (useUser as vi.Mock).mockReturnValue({
+    (useUser as Mock).mockReturnValue({
       user: null,
       setUser: vi.fn(),
     });
@@ -44,7 +44,7 @@ describe("Layout component", () => {
   });
 
   test("renders user info and logout button when user is logged in", () => {
-    (useUser as vi.Mock).mockReturnValue({
+    (useUser as Mock).mockReturnValue({
       user: { email: "test@example.com" },
       setUser: vi.fn(),
     });
@@ -64,11 +64,11 @@ describe("Layout component", () => {
 
   test("calls login function when login button is clicked", () => {
     const loginMock = vi.fn().mockResolvedValue({});
-    (useUser as vi.Mock).mockReturnValue({
+    (useUser as Mock).mockReturnValue({
       user: null,
       setUser: vi.fn(),
     });
-    (userHooks.useUserHook as vi.Mock).mockReturnValue({
+    (userHooks.useUserHook as Mock).mockReturnValue({
       login: loginMock,
       loading: false,
     });
