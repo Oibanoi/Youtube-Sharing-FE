@@ -25,7 +25,7 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [socket, setSocket] = useState<WebSocket | null>(null);
   useEffect(() => {
     if (user) {
-      const ws = new WebSocket("ws://localhost:8000/ws");
+      const ws = new WebSocket(import.meta.env.VITE_API_WS_URL);
 
       ws.onopen = () => {
         console.log("WebSocket connection established");
