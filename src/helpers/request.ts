@@ -8,7 +8,6 @@ const handleResponseError = (error: IErrorInterceptor) => {
   switch (status) {
     case 401:
       userServices.logout();
-
       break;
     case 403:
       break;

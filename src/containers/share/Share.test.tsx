@@ -4,7 +4,6 @@ import { Mock, vi } from "vitest";
 import Share from "./Share";
 import { videoHooks } from "../../hooks";
 
-// Mock useVideoHook to return sample data
 vi.mock("../../hooks", () => ({
   videoHooks: {
     useVideoHook: vi.fn().mockReturnValue({

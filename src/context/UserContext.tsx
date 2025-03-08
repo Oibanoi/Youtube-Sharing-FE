@@ -58,6 +58,12 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
       }
     }
   }, [user]);
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+    if (email) {
+      setUser({ email });
+    }
+  }, []);
   return (
     <UserContext.Provider value={{ user, setUser, socket, setSocket }}>
       {children}

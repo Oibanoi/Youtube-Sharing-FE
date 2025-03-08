@@ -14,6 +14,7 @@ const getMe = () => {
 };
 const logout = async () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("email");
 };
 const login = (username: string, password: string): Promise<ILogin> => {
   return baseClient
