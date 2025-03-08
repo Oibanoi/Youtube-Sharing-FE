@@ -1,8 +1,7 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { userServices } from "../index";
-
 const baseClient = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 const getAuthorization = () => {
