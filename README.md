@@ -1,54 +1,112 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite YouTube Sharing App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a YouTube sharing application built with React, TypeScript, and Vite. It allows users to share YouTube videos, view a list of shared videos, and register/login to the application.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Share YouTube videos
+- View a list of shared videos
+- User registration and login
+- Responsive design
+- Real-time notification
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Before you begin, ensure you have met the following requirements:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Node.js (20.18.1)
+- npm (10.8.2)
+
+## Getting Started
+
+Follow these steps to set up and run the project locally:
+
+### 1. Clone the repository
+
+```sh
+git clone https://github.com/Oibanoi/Youtube-Sharing-FE.git
+cd Youtube-Sharing-FE
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Using npm:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env` file in the root directory and add the necessary environment variables. For example:
+
+```env
+REACT_APP_API_URL=http://localhost:5000/api
+```
+
+### 4. Run the development server
+
+Using npm:
+
+```sh
+npm run dev
+```
+
+Or using yarn:
+
+```sh
+yarn dev
+```
+
+The application will be available at `http://localhost:3000`.
+
+### 5. Build for production
+
+Using npm:
+
+```sh
+npm run build
+```
+
+Or using yarn:
+
+```sh
+yarn build
+```
+
+The production build will be available in the `dist` directory.
+
+### 6. Run tests
+
+Using npm:
+
+```sh
+npm test
+```
+
+Or using yarn:
+
+```sh
+yarn test
+```
+
+## Project Structure
+
+```plaintext
+├── public
+│   └── index.html
+├── src
+│   ├── components
+│   ├── containers
+│   ├── context
+│   ├── hooks
+│   ├── services
+│   ├── App.tsx
+│   ├── index.tsx
+│   └── setupTests.ts
+├── .eslintrc.js
+├── jest.config.js
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
 ```

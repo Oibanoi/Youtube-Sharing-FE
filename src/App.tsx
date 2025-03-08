@@ -13,7 +13,7 @@ function App() {
           <Route
             key={path}
             path={path}
-            element={<Layout>{React.createElement(component)}</Layout>} // Wrap each page with Layout
+            element={<Layout>{React.createElement(component)}</Layout>}
           />
         ))}
       </Routes>

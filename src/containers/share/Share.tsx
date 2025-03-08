@@ -28,7 +28,7 @@ const Share = () => {
       <h3>Share a YouTube movie</h3>
       <Form>
         <Form.Item
-          label="YouTube URL"
+          label={<label htmlFor="youtube-url">YouTube URL</label>}
           required
           validateStatus={youtubeUrl ? "success" : "error"}
           help={youtubeUrl ? "" : "Please input a valid YouTube URL."}

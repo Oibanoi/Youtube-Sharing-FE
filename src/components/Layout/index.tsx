@@ -96,7 +96,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Button type="primary" onClick={onLogin} loading={loading}>
                   Login
                 </Button>
-                <Button type="primary" onClick={onRegister} loading={loading}>
+                <Button type="primary" onClick={onRegister}>
                   Register
                 </Button>
               </>
