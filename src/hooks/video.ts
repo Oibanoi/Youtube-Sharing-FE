@@ -31,9 +31,7 @@ const useVideoHook = (defaultFilters: IVideoFilter) => {
       setLoading(true);
       const res = await videoServices.share(url);
       if (res) {
-        notification.success({
-          message: "Create video successfully",
-        });
+        console.log("Success");
       }
     } catch (e) {
     } finally {

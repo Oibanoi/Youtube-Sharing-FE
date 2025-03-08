@@ -23,34 +23,42 @@ interface UserProviderProps {
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [socket, setSocket] = useState<WebSocket | null>(null);
+  const connectWebSocket = (user: User) => {
+    const ws = new WebSocket(import.meta.env.VITE_API_WS_URL);
+
+    ws.onopen = () => {
+      console.log("WebSocket connection established");
+      ws.send(JSON.stringify({ type: "USER_CONNECTED", userId: user.id }));
+    };
+
+    ws.onmessage = (event) => {
+      console.log("Received message:", event.data);
+      notification.open({
+        message: "New Notification",
+        description: event.data,
+      });
+    };
+
+    ws.onclose = () => {
+      console.log("WebSocket connection closed");
+    };
+
+    setSocket(ws);
+
+    return () => {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.close();
+      }
+    };
+  };
   useEffect(() => {
     if (user) {
-      const ws = new WebSocket(import.meta.env.VITE_API_WS_URL);
-
-      ws.onopen = () => {
-        console.log("WebSocket connection established");
-        ws.send(JSON.stringify({ type: "USER_CONNECTED", userId: user.id }));
-      };
-
-      ws.onmessage = (event) => {
-        console.log("Received message:", event.data);
-        notification.open({
-          message: "New Notification",
-          description: event.data,
-        });
-      };
-
-      ws.onclose = () => {
-        console.log("WebSocket connection closed");
-      };
-
-      setSocket(ws);
-
-      return () => {
-        if (ws.readyState === WebSocket.OPEN) {
-          ws.close();
-        }
-      };
+      if (socket) {
+        socket.close();
+        setSocket(null);
+      }
+      const cleanup = connectWebSocket(user);
+      return cleanup;
     } else {
       if (socket) {
         socket.close();
@@ -61,7 +69,13 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   useEffect(() => {
     const email = localStorage.getItem("email");
     if (email) {
-      setUser({ email });
+      const newUser = { email };
+      setUser(newUser);
+      if (socket) {
+        socket.close();
+        setSocket(null);
+      }
+      connectWebSocket(newUser);
     }
   }, []);
   return (
