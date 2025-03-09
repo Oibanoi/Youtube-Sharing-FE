@@ -49,7 +49,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="layout">
       <header className="header">
         <div className="header-content">
-          <div className="logo-container">
+          <div className="logo-container" onClick={() => navigate("/")}>
             <HomeFilled className="logo-icon" />
             <span className="logo-text">Funny Movies</span>
           </div>

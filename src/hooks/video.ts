@@ -11,13 +11,14 @@ const useVideoHook = (defaultFilters: IVideoFilter) => {
       setLoading(true);
       const res = await videoServices.get(params);
       if (res.data) {
-        const { currentPage, pageSize, totalItems } = res.metadata;
+        const { current_page, page_size, total_items } = res.metadata;
+        console.log(res);
         const videos = res.data;
-        setVideos(videos);
+        setVideos((prevVideos) => [...prevVideos, ...videos]);
         setPagination({
-          currentPage: currentPage,
-          pageSize,
-          totalItems: totalItems,
+          current_page,
+          page_size,
+          total_items,
         });
       }
     } catch (e) {

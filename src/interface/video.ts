@@ -8,9 +8,9 @@ export interface IVideoResponse {
 export interface IGetVideoResponse {
   data: IVideoResponse[];
   metadata: {
-    currentPage: number;
-    pageSize: number;
-    totalItems: number;
+    current_page: number;
+    page_size: number;
+    total_items: number;
   };
 }
 export interface IVideoFilter {
