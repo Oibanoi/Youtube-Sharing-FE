@@ -49,18 +49,16 @@ const ListVideo = () => {
 
               <Row style={{ marginTop: 10 }}>
                 <Col span={24}>
-                  <Space>
-                    <Button
-                      icon={<LikeOutlined />}
-                      type="default"
-                      style={{ marginRight: 8 }}
-                    >
-                      0 Upvote
-                    </Button>
-                    <Button icon={<DislikeOutlined />} type="default">
-                      Downvote
-                    </Button>
-                  </Space>
+                  <Button
+                    icon={<LikeOutlined />}
+                    type="default"
+                    style={{ marginRight: 8 }}
+                  >
+                    0 Upvote
+                  </Button>
+                  <Button icon={<DislikeOutlined />} type="default">
+                    Downvote
+                  </Button>
                 </Col>
               </Row>
             </Col>

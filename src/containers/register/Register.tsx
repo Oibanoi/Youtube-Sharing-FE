@@ -35,7 +35,6 @@ const Register: React.FC = () => {
           confirmPassword: "",
         }}
       >
-        {/* Email Field */}
         <Form.Item
           label="Email"
           name="email"
@@ -47,7 +46,6 @@ const Register: React.FC = () => {
           <Input placeholder="Enter your email" />
         </Form.Item>
 
-        {/* Password Field */}
         <Form.Item
           label="Password"
           name="password"
@@ -59,7 +57,6 @@ const Register: React.FC = () => {
           <Input.Password placeholder="Enter your password" />
         </Form.Item>
 
-        {/* Confirm Password Field */}
         <Form.Item
           label="Confirm Password"
           name="confirmPassword"
@@ -81,7 +78,6 @@ const Register: React.FC = () => {
           <Input.Password placeholder="Confirm your password" />
         </Form.Item>
 
-        {/* Submit Button */}
         <Form.Item>
           <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
             Register

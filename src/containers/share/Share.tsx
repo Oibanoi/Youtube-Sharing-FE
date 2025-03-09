@@ -31,7 +31,6 @@ const Share = () => {
           label={<label htmlFor="youtube-url">YouTube URL</label>}
           required
           validateStatus={youtubeUrl ? "success" : "error"}
-          help={youtubeUrl ? "" : "Please input a valid YouTube URL."}
         >
           <Input
             id="youtube-url"
@@ -39,7 +38,7 @@ const Share = () => {
             placeholder="Enter YouTube URL"
             style={{
               width: "100%",
-              marginTop: "10px",
+              marginTop: "-5px",
               borderRadius: "4px",
               border: "1px solid #ccc",
               padding: "8px",
