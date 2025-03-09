@@ -15,7 +15,7 @@ const handleResponseError = (error: IErrorInterceptor) => {
       // Handle error message from API response
       if (error.response && error.response.data) {
         const { data } = error.response;
-        message = data.message;
+        message = data.detail;
       }
       notification.error({
         message: "Error",
